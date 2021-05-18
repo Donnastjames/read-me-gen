@@ -1,31 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
-// const fs = require('fs');
-
-// const generateREADME = (answers) =>
-// `# ${answers.title}
-
-// {answers.description}
-
-// ## Installation
-// ${answers.installation} 
-
-// ## Usage
-// ${answers.usageInformation}
-
-// ## Contributing
-// ${answers.contributing}
-
-// ## Tests
-// ${answers.test}
-
-// ## Questions
-// GitHub profile: ${answers.github}
-// For additional questions, you may contact me at ${answers.email}.
-
-// ## License
-// [MIT](https://choosealicense.com/licenses/mit/)
-// `;
+const fs = require('fs');
+const util = require('util');
 
 // Array of questions for user input
 const questions = [
@@ -71,18 +47,48 @@ const questions = [
   },
 ];
 
-inquirer
-  .prompt(questions)
-
-  .then ((response) =>
-    console.log(response)
-  );
-
 // TODO: Create a function to write README file
-// function writeToFile(fileName, data) {}
+const writeToFile = util.promisify(fs.writeFile);
+
+const promptUser = () => {
+  return inquirer.prompt(questions);
+};
+  
+const generateReadMeText = data =>
+  `# ${data.title}
+
+${data.description}
+
+## Installation
+${data.installation} 
+
+## Usage
+${data.usageInformation}
+
+## Contributing
+${data.contributing}
+
+## Tests
+${data.test}
+
+## Questions
+GitHub profile: ${data.github}
+For additional questions, you may contact me at ${data.email}.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
+`;
+  
+
+
 
 // TODO: Create a function to initialize app
-// function init() {}
+const init = () => {
+  promptUser()
+    .then(data => writeToFile('README2.md', generateReadMeText(data)))
+    .then(() => console.log('Successfully wrote to README2.md'))
+    .catch((err) => console.error(err));
+};
 
 // Function call to initialize app
-// init();
+init();
