@@ -194,18 +194,16 @@ function renderLicenseSection(license) {
 
 // Create a function to generate markdown for README
 function generateMarkdown(data) {
-  let myMarkDown = `# ${data.title}\n\n`;
+  let myMarkDown = `# ${data.title}\n\n `;
 
   // If I must render all badge images ...
   for (let i = 0; i < data.license.length; i++) {
-    myMarkDown += `${renderLicenseBadge(data.license[i])}\n`;
+    myMarkDown += `${renderLicenseBadge(data.license[i])}\n\n  `;
   }
 
-  myMarkDown += 'Hello World!\n\n';
-
-  for (let i = 0; i < data.license.length; i++) {
-    myMarkDown += `${renderLicenseSection(data.license[i])}\n`;
-  }
+  // for (let i = 0; i < data.license.length; i++) {
+  //   myMarkDown += `${renderLicenseSection(data.license[i])}\n`;
+  // }
 
   myMarkDown += `## Installation
 ${data.installation}
@@ -225,11 +223,11 @@ GitHub profile: ${data.github}/
 For additional questions, you may contact me at ${data.email}.
 
 ## License
-TODO
+
 `;
 
   for (let i = 0; i < data.license.length; i++) {
-    myMarkDown += `${renderLicenseSection(data.license[i])}
+    myMarkDown += `${renderLicenseSection(data.license[i])}\  
 `;
   }
 
