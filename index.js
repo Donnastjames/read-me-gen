@@ -55,7 +55,12 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-const writeToFile = util.promisify(fs.writeFile);
+function writeToFile(fileName, data) {
+  fs.writeFile(fileName, data, err =>
+      err ? console.error(err) : console.log(`Successfully created ${fileName}!`)
+    );
+}
+// const writeToFile = util.promisify(fs.writeFile);
 
 const promptUser = () => {
   return inquirer.prompt(questions);
@@ -65,7 +70,6 @@ const promptUser = () => {
 const init = () => {
   promptUser()
     .then(data => writeToFile('README2.md', generateMarkdown(data)))
-    .then(() => console.log('Successfully wrote to README2.md'))
     .catch((err) => console.error(err));
 };
 

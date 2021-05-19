@@ -1,4 +1,4 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
+// Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 
 const licenseArray = [
@@ -154,11 +154,14 @@ const licenseArray = [
   },
 ];
 
+// Create a function that returns a license badge based on which license is passed in
+// If there is no license, return an empty string
+
 function renderLicenseBadge(license) {  
   const index = licenseArray.findIndex(item => item.name === license);
 
   if (index >= 0) {
-    return licenseArray[index].badgeLink;
+    return `![Image](${licenseArray[index].badgeLink})`;
   }
 
   return '';
@@ -183,8 +186,7 @@ function renderLicenseSection(license) {
 
   if (index >= 0) {
     const licenseLink = renderLicenseLink(license);
-    const licenseBadge = renderLicenseBadge(license);
-    return `[${license}](${licenseLink}) ![Image](${licenseBadge})`;
+    return `[${license}](${licenseLink})`;
   }
 
   return '';
@@ -192,12 +194,21 @@ function renderLicenseSection(license) {
 
 // Create a function to generate markdown for README
 function generateMarkdown(data) {
-  return `# ${data.name}
+  let myMarkDown = `# ${data.title}\n\n`;
 
-${data.description}
+  // If I must render all badge images ...
+  for (let i = 0; i < data.license.length; i++) {
+    myMarkDown += `${renderLicenseBadge(data.license[i])}\n`;
+  }
 
-## Installation
-${data.installation} 
+  myMarkDown += 'Hello World!\n\n';
+
+  for (let i = 0; i < data.license.length; i++) {
+    myMarkDown += `${renderLicenseSection(data.license[i])}\n`;
+  }
+
+  myMarkDown += `## Installation
+${data.installation}
 
 ## Usage
 ${data.usageInformation}
@@ -209,12 +220,20 @@ ${data.contributing}
 ${data.test}
 
 ## Questions
-GitHub profile: ${data.github}
+GitHub profile: ${data.github}/
+
 For additional questions, you may contact me at ${data.email}.
 
 ## License
-${renderLicenseSection(data.license[0])}
+TODO
 `;
+
+  for (let i = 0; i < data.license.length; i++) {
+    myMarkDown += `${renderLicenseSection(data.license[i])}
+`;
+  }
+
+  return myMarkDown;
 }
 
 module.exports = generateMarkdown;
