@@ -205,7 +205,21 @@ function generateMarkdown(data) {
   //   myMarkDown += `${renderLicenseSection(data.license[i])}\n`;
   // }
 
-  myMarkDown += `## Installation
+  myMarkDown += `### Table of Contents
+
+1.  [Description](#Description)
+2.  [Installation](#Installation)
+3.  [Usage](#Usage)
+4.  [Contributing](#Contributing)
+5.  [Tests](#Tests)
+6.  [Questions](#Questions)
+7.  [License](#License)
+
+
+## Description
+${data.description}
+
+## Installation
 ${data.installation}
 
 ## Usage
@@ -218,7 +232,7 @@ ${data.contributing}
 ${data.test}
 
 ## Questions
-GitHub profile: ${data.github}/
+GitHub profile: ${data.github}
 
 For additional questions, you may contact me at ${data.email}.
 
@@ -226,6 +240,8 @@ For additional questions, you may contact me at ${data.email}.
 
 `;
 
+  // Oddity: need \ followed by two spaces for newline to show
+  // in the markdown ...
   for (let i = 0; i < data.license.length; i++) {
     myMarkDown += `${renderLicenseSection(data.license[i])}\  
 `;
