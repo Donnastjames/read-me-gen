@@ -199,23 +199,18 @@ function generateMarkdown(data) {
     myMarkDown += `${renderLicenseBadge(data.license[i])}\n\n  `;
   }
 
-  // for (let i = 0; i < data.license.length; i++) {
-  //   myMarkDown += `${renderLicenseSection(data.license[i])}\n`;
-  // }
-
-  myMarkDown += `### Table of Contents
-
-1.  [Description](#Description)
-2.  [Installation](#Installation)
-3.  [Usage](#Usage)
-4.  [Contributing](#Contributing)
-5.  [Tests](#Tests)
-6.  [Questions](#Questions)
-7.  [License](#License)
-
-
-## Description
+  myMarkDown +=
+`## Description
 ${data.description}
+  
+### Table of Contents
+
+1.  [Installation](#Installation)
+2.  [Usage](#Usage)
+3.  [Contributing](#Contributing)
+4.  [Tests](#Tests)
+5.  [Questions](#Questions)
+6.  [License](#License)
 
 ## Installation
 ${data.installation}
